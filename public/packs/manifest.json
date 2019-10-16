@@ -1,0 +1,15 @@
+{
+  "application_main.js": "/packs/js/application_main-0de600385ed61a1473f9.js",
+  "application_main.js.map": "/packs/js/application_main-0de600385ed61a1473f9.js.map",
+  "entrypoints": {
+    "application_main": {
+      "js": [
+        "/packs/js/application_main-0de600385ed61a1473f9.js"
+      ],
+      "js.map": [
+        "/packs/js/application_main-0de600385ed61a1473f9.js.map"
+      ]
+    }
+  },
+  "media/src/components/images/flag.png": "/packs/media/src/components/images/flag-ed595e5fc5758880b1b2a458e172d473.png"
+}

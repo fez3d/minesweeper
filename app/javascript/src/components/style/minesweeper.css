@@ -1,0 +1,72 @@
+.app {
+  text-align: center; 
+  margin-top: 18px;
+}
+
+body {
+  background-color: #F2F1F0;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.mine-sweeper {
+  padding: 10px 10px 10px;
+  margin: 0 auto;
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.button {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #fff #999 #999 #fff;
+  height: 100%;
+  display: block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.table-game {
+  margin: 0 auto;
+}
+
+.cell {
+  font-size: 29px;
+  font-weight: bold;
+  width: 46px;
+  height: 44px;
+}
+
+.cell-cover {
+  background-color: #BABDB6;
+  border-width: 1px;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.cell-cover:hover {
+  background-color: #DEDEDC;
+}
+
+.cell-cover-opened {
+  background-color: #DEDEDC;
+}
+
+.cell-number {
+  color: #2E3436;
+}
+
+.cell-flag {
+  background: url("../images/flag.png") no-repeat center center;
+  height: 100%;
+  background-color: #BABDB6;
+  border-radius: 5px;
+}
+
+.cell-flag:hover {
+  background-color: #DEDEDC;
+}
