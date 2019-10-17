@@ -1,11 +1,11 @@
 import { defaultCell, LEVEL } from "../store/defaultStore";
 
 function putBombs() {
-  const locations = [];
+  let locations = [];
   while (locations.length < LEVEL.mines) {
-    const x = Math.floor(Math.random() * LEVEL.size);
-    const y = Math.floor(Math.random() * LEVEL.size);
-    const coordinate = `${x},${y}`;
+    let coordinateX = Math.floor(Math.random() * LEVEL.size);
+    let coordinateY = Math.floor(Math.random() * LEVEL.size);
+    let coordinate = `${coordinateX},${coordinateY}`;
     if (!locations.includes(coordinate)) {
       locations.push(coordinate);
     }
@@ -14,11 +14,11 @@ function putBombs() {
 }
 
 function parseCellsToArray(board) {
-  var cells = [];
+  let cells = [];
   let coordinateX = 0;
-  while (coordinateX != 16) {
+  while (coordinateX != LEVEL.size) {
     let coordinateY = 0;
-    while (coordinateY != 16) {
+    while (coordinateY != LEVEL.size) {
       cells.push(board[`${coordinateX},${coordinateY}`]);
       coordinateY += 1;
     }
@@ -27,7 +27,7 @@ function parseCellsToArray(board) {
   return cells
 }
 
-function saveOne(board) {
+function saveCell(board) {
   fetch(`api/cells/${board.position}`, {
     method: "PUT",
     body: JSON.stringify(board),
@@ -44,7 +44,7 @@ function parseCoordinates(position) {
   return { row, col };
 }
 
-function saveAll(cell) {
+function saveBoard(cell) {
   fetch(`api/save/board`, {
     method: "PUT",
     body: JSON.stringify({ cell }),
@@ -65,19 +65,19 @@ function loadGame() {
 function coordinateForBoard(boardSize, callback) {
   for (let row = 0; row < boardSize; row++) {
     for (let col = 0; col < boardSize; col++) {
-      const coordinate = [row, col].join(",");
+      let coordinate = [row, col].join(",");
       callback(coordinate, row, col);
     }
   }
 }
 
 function aroundCells(coordinate, callback) {
-  const p = parseCoordinates(coordinate);
-  for (let x = p.row - 1; x <= p.row + 1; x++) {
-    for (let y = p.col - 1; y <= p.col + 1; y++) {
-      if (x >= 0 || y >= 0) {
-        const surroundCoord = [x, y].join(",");
-        callback(surroundCoord, x, y);
+  const position = parseCoordinates(coordinate);
+  for (let coordinateX = position.row - 1; coordinateX <= position.row + 1; coordinateX++) {
+    for (let coordinateY = position.col - 1; coordinateY <= position.col + 1; coordinateY++) {
+      if (coordinateX >= 0 || coordinateY >= 0) {
+        let surroundCoord = [coordinateX, coordinateY].join(",");
+        callback(surroundCoord, coordinateX, coordinateY);
       }
     }
   }
@@ -91,8 +91,7 @@ function openCell(board, position) {
 
   if (board[position].hasMine) {
     alert("bomba!!!");
-    newBoard = resetGame();
-    return newBoard;
+    return resetGame();
   }
 
   const cell = { ...board[position], isOpen: true };
@@ -102,7 +101,7 @@ function openCell(board, position) {
   } else {
     newBoard = { ...board, [position]: cell };
   }
-  saveOne(newBoard[position]);
+  saveCell(newBoard[position]);
   return newBoard;
 }
 
@@ -112,7 +111,7 @@ function swapFlag(board, position) {
   }
   const cell = { ...board[position], hasFlag: !board[position].hasFlag };
   const newBoard = { ...board, [position]: cell };
-  saveOne(newBoard[position]);
+  saveCell(newBoard[position]);
   return newBoard;
 }
 
@@ -154,7 +153,7 @@ function resetGame() {
     }
   });
   let cells = parseCellsToArray(board)
-  saveAll(cells);
+  saveBoard(cells);
   return board;
 }
 

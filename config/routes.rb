@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :articles
   end
 
-  put 'api/cells/:id', to: 'api/cells#update_one'
-  put 'api/save/board', to: 'api/cells#update_all'
+  put 'api/cells/:id', to: 'api/cells#update_cell'
+  put 'api/save/board', to: 'api/cells#update_board'
   get 'api/load/board', to: 'api/cells#load'
 
 

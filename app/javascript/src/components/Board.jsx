@@ -31,11 +31,13 @@ const mapStateToProps = ({ board }) => {
   const boardDim = Math.sqrt(Object.keys(board).length);
   const table = [];
   coordinateForBoard(boardDim, (coordinate, row, col) => {
+
     if (!table[row]) {
       table[row] = [];
     }
     table[row][col] = board[coordinate];
   });
+  
   return { table };
 };
 
