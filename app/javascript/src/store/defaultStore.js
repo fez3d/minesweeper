@@ -12,7 +12,7 @@ const defaultStore = {
 
 const LEVEL = {
   size: 16,
-  mines: 40
+  mines: 50
 };
 
 export { defaultStore as default, defaultCell, LEVEL };

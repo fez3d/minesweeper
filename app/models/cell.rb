@@ -1,6 +1,6 @@
 class Cell < ApplicationRecord
 
-  def self.update_board cells
+  def self.update_board(cells, params)
     cells.each_with_index do |cell, index|
       cell.hasFlag = params[:cell][index][:hasFlag]
       cell.isOpen = params[:cell][index][:isOpen]
@@ -10,7 +10,7 @@ class Cell < ApplicationRecord
     end
   end
 
-  def self.load_game cells 
+  def self.load_game(cells) 
     json = "{"
     part = ""
     cells.each_with_index do |cell, index|

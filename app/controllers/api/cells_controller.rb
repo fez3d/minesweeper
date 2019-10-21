@@ -5,7 +5,7 @@ class Api::CellsController < ApplicationController
 
   def update_board
     cells = Cell.all
-    Cell.update_board(cells)
+    Cell.update_board(cells, params)
   end
 
   def update_cell
